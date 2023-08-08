@@ -1,6 +1,7 @@
 import { test, expect } from '@playwright/test';
+import LoginPage from '../pages/LoginPage';
 
-test('test', async ({ page }) => {
+test('sanity test', async ({ page }) => {
   await page.goto('https://www.saucedemo.com/');
   await page.locator('[data-test="username"]').click();
   await page.locator('[data-test="username"]').fill('standard_user');
@@ -19,4 +20,11 @@ test('test', async ({ page }) => {
   await page.locator('[data-test="continue"]').click();
   await page.locator('[data-test="finish"]').click();
   await page.locator('[data-test="back-to-products"]').click();
+});
+
+test('login test', async ({ page }) => {
+  await page.goto('https://www.saucedemo.com/');
+  const loginPage = new LoginPage(page);
+  await loginPage.loginToApplication();
+  
 });
