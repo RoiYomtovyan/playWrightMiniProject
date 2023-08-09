@@ -1,16 +1,22 @@
-import { Page } from "@playwright/test";
+import { Locator, Page } from "@playwright/test";
 
 export default class LoginPage {
 
-    protected page: Page;
+    userNameField : Locator;
+    passwordField : Locator;
+    loginButton : Locator;
 
-    constructor (page:Page){
-        this.page = page;
+
+    constructor (protected page: Page){
+        this.userNameField = this.page.locator('[data-test="username"]');
+        this.passwordField = this.page.locator('[data-test="password"]');
+        this.loginButton = this.page.locator('[data-test="login-button"]');
+        
     }
 
-    public async loginToApplication() {
-        await this.page.locator('[data-test="username"]').fill('standard_user');
-        await this.page.locator('[data-test="password"]').fill('secret_sauce');
-        await this.page.locator('[data-test="login-button"]').click();
+    public async loginToApplication(username:string, password:string) {
+        await this.userNameField.fill(username);
+        await this.passwordField.fill(password);
+        await this.loginButton.click();
     }
 }

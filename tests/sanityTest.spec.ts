@@ -25,6 +25,6 @@ test('sanity test', async ({ page }) => {
 test('login test', async ({ page }) => {
   await page.goto('https://www.saucedemo.com/');
   const loginPage = new LoginPage(page);
-  await loginPage.loginToApplication();
+  await loginPage.loginToApplication('standard_user','secret_sauce');
   
 });
