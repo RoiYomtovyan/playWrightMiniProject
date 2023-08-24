@@ -1,5 +1,6 @@
 import { test, expect } from '@playwright/test';
 import LoginPage from '../pages/LoginPage';
+import UserCredentials from '../helpers/UserCredentials';
 
 test('sanity test', async ({ page }) => {
   await page.goto('https://www.saucedemo.com/');
@@ -25,6 +26,6 @@ test('sanity test', async ({ page }) => {
 test('login test', async ({ page }) => {
   await page.goto('https://www.saucedemo.com/');
   const loginPage = new LoginPage(page);
-  await loginPage.loginToApplication('standard_user','secret_sauce');
+  await loginPage.loginToApplication(UserCredentials.STANDARD_USER,UserCredentials.PASSWORD);
   
 });
