@@ -24,8 +24,16 @@ test('sanity test', async ({ page }) => {
 });
 
 test('login test', async ({ page }) => {
-  await page.goto('https://www.saucedemo.com/');
   const loginPage = new LoginPage(page);
-  await loginPage.loginToApplication(UserCredentials.STANDARD_USER,UserCredentials.PASSWORD);
+  await loginPage.loginToApplication();
+  
+});
+
+
+// in this test we are demonstrating the option to pass different user to the loginToApplication function 
+//so it will overwite the parameter we are passing by defult
+test('login with locked out user test', async ({ page }) => {
+  const loginPage = new LoginPage(page);
+  await loginPage.loginToApplication(UserCredentials.LOCKED_OUT_USER);
   
 });
