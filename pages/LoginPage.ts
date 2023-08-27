@@ -1,18 +1,20 @@
 import { Locator, Page, expect } from "@playwright/test";
 import UserCredentials from "../helpers/UserCredentials";
+import { ErrorMessages } from "../helpers/ErrorMessages";
 
 export default class LoginPage {
 
-    userNameField : Locator;
-    passwordField : Locator;
-    loginButton : Locator;
+   private userNameField : Locator;
+   private passwordField : Locator;
+   private loginButton : Locator;
+   private errorMessage:Locator;
 
 
     constructor (protected page: Page){
         this.userNameField = this.page.locator('[data-test="username"]');
         this.passwordField = this.page.locator('[data-test="password"]');
         this.loginButton = this.page.locator('[data-test="login-button"]');
-        
+        this.errorMessage = this.page.locator('[data-test="error"]');
     }
 
     // Roi: in the login application we pass defult values in the signeture so when we call it we can pass no parameters 
@@ -24,10 +26,13 @@ export default class LoginPage {
         await this.userNameField.fill(username);
         await this.passwordField.fill(password);
         await this.loginButton.click();
-        await this.validateUrl(`${UserCredentials.BASE_URL}inventory.html`)
     }
 
     public async validateUrl (url:string) {
         await expect(this.page).toHaveURL(url);
+    }
+
+    public async validateErrorMessage(errorMessage:ErrorMessages){
+        await expect(this.errorMessage).toContainText(errorMessage.valueOf());
     }
 }
