@@ -1,6 +1,5 @@
 import { test, expect } from '@playwright/test';
 import LoginPage from '../pages/LoginPage';
-import UserCredentials from '../helpers/UserCredentials';
 import ProductPage from '../pages/ProductsPage';
 
 test('sanity test', async ({ page }) => {
@@ -28,7 +27,7 @@ test('login test', async ({ page }) => {
   const loginPage = new LoginPage(page);
   await loginPage.loginToApplication();
   const productPage = new ProductPage(page);
-  await loginPage.validateUrl(UserCredentials.BASE_URL + "inventory.html");
+  await loginPage.validateUrl(process.env.BASE_URL + "inventory.html");
   productPage.validateTitle("Products");
   
 });
@@ -38,6 +37,6 @@ test('login test', async ({ page }) => {
 //so it will overwite the parameter we are passing by defult
 test('login with locked out user test', async ({ page }) => {
   const loginPage = new LoginPage(page);
-  await loginPage.loginToApplication(UserCredentials.LOCKED_OUT_USER);
+  await loginPage.loginToApplication(process.env.LOCKED_OUT_USER);
   
 });

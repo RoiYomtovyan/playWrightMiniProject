@@ -1,7 +1,5 @@
 import { test, expect } from '@playwright/test';
 import LoginPage from '../../pages/LoginPage';
-import UserCredentials from '../../helpers/UserCredentials';
-
 
 test.describe("positive login Scenarios", () => {
 
@@ -12,14 +10,14 @@ test.describe("positive login Scenarios", () => {
     })
 
     test("login with problem_user", async ({ page }) => {
-        await loginPage.loginToApplication(UserCredentials.PROBLEM_USER);
-        await loginPage.validateUrl(UserCredentials.INVENTORY_URL);
+        await loginPage.loginToApplication(process.env.PROBLEM_USER);
+        await loginPage.validateUrl(process.env.INVENTORY_URL as string);
 
     })
 
     test("login with performance_glitch_user", async ({ page }) => {
-        await loginPage.loginToApplication(UserCredentials.PERFORMANCE_GLITCH_USER);
-        await loginPage.validateUrl(UserCredentials.INVENTORY_URL);
+        await loginPage.loginToApplication(process.env.PERFORMANCE_GLITCH_USER);
+        await loginPage.validateUrl(process.env.INVENTORY_URL as string);
 
     })
 
