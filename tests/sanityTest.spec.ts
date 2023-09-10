@@ -1,6 +1,7 @@
 import { test, expect } from '@playwright/test';
 import LoginPage from '../pages/LoginPage';
 import ProductPage from '../pages/ProductsPage';
+import Urls from '../helpers/Urls';
 
 test('sanity test', async ({ page }) => {
   await page.goto('https://www.saucedemo.com/');
@@ -27,7 +28,7 @@ test('login test', async ({ page }) => {
   const loginPage = new LoginPage(page);
   await loginPage.loginToApplication();
   const productPage = new ProductPage(page);
-  await loginPage.validateUrl(process.env.BASE_URL + "inventory.html");
+  await loginPage.validateUrl(Urls.BASE_URL + "inventory.html");
   productPage.validateTitle("Products");
   
 });
