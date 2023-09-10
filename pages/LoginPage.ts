@@ -1,6 +1,7 @@
 import { Locator, Page, expect } from "@playwright/test";
 import { ErrorMessages } from "../helpers/ErrorMessages";
 import { BasePage } from "./BasePage";
+import Urls from "../helpers/urls";
 
 export default class LoginPage extends BasePage {
 
@@ -21,10 +22,10 @@ export default class LoginPage extends BasePage {
     // Roi: in the login application we pass defult values in the signeture so when we call it we can pass no parameters 
 
     public async loginToApplication(username = process.env.STANDARD_USER as string,
-        password = process.env.PASSWORD as string, url = process.env.BASE_URL as string) {
-        console.log("BASE_URL:", process.env.BASE_URL);
+        password = process.env.PASSWORD as string, url = Urls.BASE_URL) {
+        console.log("BASE_URL:", Urls.BASE_URL);
         await this.page.goto(url);
-        await this.validateUrl(process.env.BASE_URL as string)
+        await this.validateUrl(Urls.BASE_URL)
         await this.userNameField.fill(username);
         await this.passwordField.fill(password);
         await this.loginButton.click();
