@@ -22,6 +22,7 @@ export default class LoginPage extends BasePage {
 
     public async loginToApplication(username = process.env.STANDARD_USER as string,
         password = process.env.PASSWORD as string, url = process.env.BASE_URL as string) {
+        console.log("BASE_URL:", process.env.BASE_URL);
         await this.page.goto(url);
         await this.validateUrl(process.env.BASE_URL as string)
         await this.userNameField.fill(username);
