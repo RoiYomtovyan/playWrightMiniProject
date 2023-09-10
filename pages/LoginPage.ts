@@ -1,7 +1,7 @@
 import { Locator, Page, expect } from "@playwright/test";
 import { ErrorMessages } from "../helpers/ErrorMessages";
 import { BasePage } from "./BasePage";
-import Urls from "../helpers/urls";
+import Urls from "../helpers/Urls";
 
 
 export default class LoginPage extends BasePage {

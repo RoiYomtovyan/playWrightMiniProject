@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 import LoginPage from '../../pages/LoginPage';
-import Urls from '../../helpers/urls';
+import Urls from '../../helpers/Urls';
 
 test.describe("positive login Scenarios", () => {
 
