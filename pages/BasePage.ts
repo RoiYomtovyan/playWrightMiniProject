@@ -22,4 +22,31 @@ export abstract class BasePage {
         })
 
     }
+
+    async sleep(time = 5): Promise<void> {
+        await test.step(`Sleeping ${time} seconds`, async () => {
+          console.log(`Sleeping ${time}`)
+          await new Promise(f => setTimeout(f, time * 1000));
+        });
+      }
+
+
+      async selectValueFromDropDown(label:string, value:string): Promise<void> {
+        await test.step(`Click on Drop Down ${label}`, async () => {
+          console.log(`Click on Drop Down ${label}`)
+    
+          const labelEl = await this.page.locator(`label:has-text("${label}")`);
+          const dropdownContainer = await labelEl.locator('xpath=following-sibling::div');
+          await dropdownContainer.click();
+    
+          await this.page.keyboard.press('ArrowDown');
+    
+          await this.page.getByText(value).click();
+          
+        });
+      }
+
+      async reloadPage(): Promise <void> {
+        await this.page.reload();
+      }
 }
