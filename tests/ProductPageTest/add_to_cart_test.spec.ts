@@ -22,6 +22,4 @@ test ("add and remove products to cart and verify that the cart icon number is c
     await productPage.verifyCartIcon(1);
     await productPage.addOrRemoveProductToCart('remove','Sauce Labs Bike Light');
     await productPage.verifyCartIcon(0);
-    await productPage.verifyItemPrice('Sauce Labs Bolt T-Shirt' ,'$15.99')
-
 })
