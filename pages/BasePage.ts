@@ -3,7 +3,10 @@ import { Locator, Page, expect, test } from "@playwright/test";
 
 export abstract class BasePage {
 
+  url: string 
+
     constructor(protected page: Page) {
+      this.url = '/'
 
     }
 
@@ -15,6 +18,12 @@ export abstract class BasePage {
 
     }
 
+    async visit(url: string = this.url): Promise<void> {
+      await test.step(`Opening the url "${url}"`, async () => {
+        await this.page.goto(url); //{ waitUntil: 'networkidle' }
+      });
+    }
+
     public async validateElementText(element: Locator, expectedText: string) {
         await test.step(`validating that the locator text is ${expectedText}`, async () => {
             await expect(element).toContainText(expectedText);
@@ -23,7 +32,7 @@ export abstract class BasePage {
 
     }
 
-    async sleep(time = 5): Promise<void> {
+   public async sleep(time = 5): Promise<void> {
         await test.step(`Sleeping ${time} seconds`, async () => {
           console.log(`Sleeping ${time}`)
           await new Promise(f => setTimeout(f, time * 1000));
@@ -31,7 +40,7 @@ export abstract class BasePage {
       }
 
 
-      async selectValueFromDropDown(label:string, value:string): Promise<void> {
+      public async selectValueFromDropDown(label:string, value:string): Promise<void> {
         await test.step(`Click on Drop Down ${label}`, async () => {
           console.log(`Click on Drop Down ${label}`)
     
@@ -46,7 +55,16 @@ export abstract class BasePage {
         });
       }
 
-      async reloadPage(): Promise <void> {
+     public async reloadPage(): Promise <void> {
         await this.page.reload();
+      }
+
+      public async convertToLowerCaseWithDash(input: string): Promise<string> {
+        // Convert to lower case
+        const lowerCaseString = input.toLowerCase();
+      
+        // Replace consecutive hyphens with a single hyphen and then replace spaces with a hyphen
+        const result = lowerCaseString.replace(/-+/g, '-').replace(/\s+/g, '-');
+        return result;
       }
 }
