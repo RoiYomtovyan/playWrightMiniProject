@@ -13,12 +13,12 @@ test ("verify items prices ", async({page}) => {
     
     await loginPage.loginToApplication();
     await productPage.visit();
-    await productPage.verifyItemPrice('Sauce Labs Backpack' ,'$29.99')
-    await productPage.verifyItemPrice('Sauce Labs Bike Light' ,'$9.99')
-    await productPage.verifyItemPrice('Sauce Labs Bolt T-Shirt' ,'$15.99')
-    await productPage.verifyItemPrice('Sauce Labs Fleece Jacket' ,'$49.99')
-    await productPage.verifyItemPrice('Sauce Labs Onesie' ,'$7.99')
-    await productPage.verifyItemPrice('Test.allTheThings() T-Shirt (Red)' ,'$15.99')
+    await productPage.verifyItemPrice('Sauce Labs Backpack')
+    await productPage.verifyItemPrice('Sauce Labs Bike Light')
+    await productPage.verifyItemPrice('Sauce Labs Bolt T-Shirt')
+    await productPage.verifyItemPrice('Sauce Labs Fleece Jacket')
+    await productPage.verifyItemPrice('Sauce Labs Onesie')
+    await productPage.verifyItemPrice('Test.allTheThings() T-Shirt (Red)')
 
 
 })

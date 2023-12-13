@@ -58,46 +58,34 @@ export default class ProductPage extends BasePage {
 
     }
 
-    public async verifyItemPrice(item:string , priceToVerify:string ){
+    public async verifyItemPrice(item:string) {
+        
+        let prices = {
+            "Sauce Labs Backpack" : {itemNumber:'1' , price:'$29.99'},
+            "Sauce Labs Bike Light" : {itemNumber:'2', price:'$9.99'},
+            "Sauce Labs Bolt T-Shirt" : {itemNumber:'3', price:'$15.99'},
+            "Sauce Labs Fleece Jacket" :{itemNumber:'4', price:'$49.99'},
+            "Sauce Labs Onesie":{itemNumber:'5', price:'$7.99'},
+            "Test.allTheThings() T-Shirt (Red)" : {itemNumber:'6', price:'$15.99'},
+        }
+        // Use the item name to get the corresponding item in the prices object
+         const itemDetails = prices[item];
+         if (itemDetails) {
+        // If the item is found in the prices object, extract the item number
+        const itemNumber = itemDetails.itemNumber;
 
-        let itemNumber;
-        switch (item) {
+        // Use the item number to construct the XPath and get the price
+        const price = await this.page.locator(`xpath=(//div[@class="inventory_item_price"])[${itemNumber}]`).textContent();
 
-            case "Sauce Labs Backpack":
-                itemNumber = 1;
-            break;
+        console.log("Verify that the price of item", item, "is", price);
+        expect(itemDetails.price == price).toBeTruthy()
+        } 
 
-            case "Sauce Labs Bike Light":
-                itemNumber = 2;
-            break;
-
-            case "Sauce Labs Bolt T-Shirt":
-                itemNumber = 3;
-            break;
-
-            case "Sauce Labs Fleece Jacket":
-                itemNumber = 4;
-            break;
-
-            case "Sauce Labs Onesie":
-                itemNumber = 5;
-            break;
-
-            case "Test.allTheThings() T-Shirt (Red)":
-                itemNumber = 6;
-            break;
-
-            default:
-                console.log("you did not pass the right item")
-            
-            }
-
-            let price = await this.page.locator(`xpath=(//div[@class="inventory_item_price"])[${itemNumber}]`).textContent()
-            console.log( "verify that the price of item ", item, "is" , price)
-            expect(priceToVerify == price).toBeTruthy()
-
+       else {
+        console.log("Item not found in prices object");
+      }
        
 
-
     }
+    
 }
